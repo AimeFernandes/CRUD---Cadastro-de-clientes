@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+        <meta charset="UTF-8">
+        <title>Questão 3</title>
+        
+        <script>
+        class Cliente {
+            constructor(nome, telefone){
+                this.nome = nome;
+                this.telefone = telefone;
+            }   
+         }
+
+      const clientes = [];
+      var seleção = 0 ;
+     
+      do {
+        seleção = prompt("Informe a opção a ser realizada: \n 1 - Cadastrar cliente \n 2 - Remover cliente \n 3 - Altualizar cliente \n 4 - Buscar cliente\n 5- Listar todos os clientes\n 0 - Sair");
+       
+        if (seleção == 1)
+          cadastrar()
+        else if (seleção == 2)
+          deletar()
+        else if (seleção == 3)
+          atualizar()
+        else if (seleção == 4)
+            buscarCliente()
+        else if(seleção == 5)
+          exibirClientes()
+
+      }while (seleção!=0)
+
+//FUNÇÃO CADASTRAR      
+      function cadastrar(){
+        const nome = prompt("Informe o nome do cliente: \n");        
+        const telefone = prompt("Informe o telefone do cliente: \n");
+        const cliente = new Cliente(nome, telefone);
+        clientes.push(cliente);
+       
+      }
+
+//FUNÇÃO DELETAR        
+      function deletar(){
+        const nome = prompt("Qual cliente deseja deletar?");
+        var verif = false;
+        var index = 0;
+
+        for(var i=0; i<clientes.length; i++){
+            if(clientes[i].nome==nome){
+                index = i;
+                verif = true;
+            }
+        }
+
+        if(verif==true){
+            clientes.splice(index,1)
+            console.log(clientes)
+            alert("Usuário removido com sucesso!")
+        }else{
+            alert("Este usuário não existe no sistema!")
+        }
+       }  
+
+// FUNÇÃO ATUALIZAR
+        function atualizar(){
+            const nome = prompt("Qual cliente deseja atualizar? ");
+            
+            var verif = false
+
+            for(var i=0;i<clientes.length;i++){
+                if(clientes[i].nome==nome){
+                    const resposta1 = prompt("O que deseja atualizar?\n 1- nome\n 2- telefone ");
+                    if(resposta1 == 1){
+                        const valor_novo= prompt("Escreva o valor novo: ");
+                        clientes[i].nome = valor_novo
+                    }else{
+                        const valor_novo= prompt("Escreva o valor novo: ");
+                        clientes[i].telefone = valor_novo
+                    }
+                    verif = true;
+                }
+            }
+
+            if(verif==true){
+                alert("Usuário atualizado com sucesso!")
+            }else{
+                alert("Usuário não encontrado no sistema!")
+            }
+        }
+        
+
+// FUNÇÃO BUSCAR CLIENTE ESPECÍFICO
+        function buscarCliente(){
+            const busca = prompt("Qual cliente deseja buscar?")
+      
+            var verif = false
+
+            for(var i=0; i<clientes.length;i++){
+                if(clientes[i].nome == busca){
+                alert(`Nome: ${clientes[i].nome} \n Telefone: ${clientes[i].telefone}`)
+                verif = true
+                }
+            }
+
+            if(verif==false){
+                alert("Usuário não encontrado!");
+            }
+        }
+
+// FUNÇÃO LISTAR CLIENTES
+        function exibirClientes(){
+            var texto = "";
+            for(var i=0; i<clientes.length;i++){
+                texto += `Nome: ${clientes[i].nome} Telefone: ${clientes[i].telefone}\n `
+            }
+            
+            alert(texto);
+        }
+
+        alert("Obrigado por acessar o sistema, até breve!");
+            
+        </script>
+    </html>
